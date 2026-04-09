@@ -1,4 +1,6 @@
 import player as p
+import enemy as e
+import combat as c
 
 def show_banner():
     
@@ -24,10 +26,20 @@ def game_loop(player):
         print(" [3] Display Stats.")
         print(" [4] Quit to Menu.")
 
-        choice = input("Enter your choice:").strip()
+        choice = input("Enter your choice :").strip()
 
         if choice == "1":
-            pass
+            #Spawn an enemy
+            foe = e.spawn_enemy(player["level"])
+            result = c.run_combat(player, foe)
+
+            if result == "dead":
+                print("GAME OVER")
+                print(f"Player has reached the level {player['level']} with total kills: {player['kills']}")
+                print("Better luck next time!!")
+                break   # Exit game loop and return to main menu
+
+            
 
         elif choice == "2":
             if player["gold"] >= 10:
@@ -55,8 +67,8 @@ def main():
     while True:
         choice = main_menu()
 
-        if choice == 1:
-            name = input("Enter the player's name")
+        if choice == "1":
+            name = input("Enter the player's name :")
 
             if not name:
                 name = "Hero"
@@ -64,7 +76,7 @@ def main():
             hero = p.create_player(name)
             game_loop(hero)
         
-        elif choice == 2:
+        elif choice == "2":
             print("\n Thanks for playing adventurer!! Visit again! \n")
             break
 
