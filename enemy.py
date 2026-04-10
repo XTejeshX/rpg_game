@@ -27,6 +27,31 @@ def spawn_enemy(player_level = 1):
     enemy = template.copy()
     return enemy
 
+def show_enemy_stats(enemy):
+    # Prints the stats of enemy
+    print(f"\n 👿 {enemy["name"]}")
+    print(f" HP     : {enemy['hp']}")
+    print(f" Attack : {enemy['attack']}")
+
+def enemy_attack(enemy):
+    """
+    Enemy deals damage with a small random variance.
+    Returns the damage dealt.
+    """
+    damage = random.randint(
+        max(1, enemy["attack"] - 3),
+        enemy["attack"] + 3
+        )
+    return damage
+    
 
 def is_dead(enemy):
+    # returns a boolean value whether enemy is dead( return True ) or not( return False ).
     return enemy["hp"] <= 0
+
+def take_damage(enemy, damage):
+    # reduce enemy HP by the damage taken
+    enemy["hp"] -= damage
+    
+    if enemy["hp"] < 0:
+        enemy["hp"] = 0

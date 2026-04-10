@@ -7,3 +7,9 @@ APRIL 09 2026
 
 1. Created an enemy.py file where all the stuff about the enemy will be present like the type of enemy and their stats and whether if the enemy is defeated or not and spawning the enemy.
 2. Created an combat.py file where all the stuff about the combat will be present as of right now nothing is added into it just created a small function where the player and enemy will    run into combat.
+
+
+APRIL 10 2026
+1. Added combat feature between player and enemy which is present in combat.py file.
+2. Added enemy stats, attack where how much damage it causes to player, whether it is still alive or not and how much damage it has taken in enemy.py file.
+3. Added player atttack feature, how much damage player took, whether player is alive or not in player.py file. 
