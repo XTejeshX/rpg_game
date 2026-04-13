@@ -59,4 +59,10 @@ def take_damage(player, damage):
 
 def level_up(player):
     # level up player and improve stats
-    pass
+    
+    player["level"] += 1
+    player["max_hp"] += 20
+    player["hp"] = player["max_hp"]  # heal player to full health on level up
+    player["attack"] += 5
+    print(f"\n 🎉 Congratulations! You have leveled up to level {player['level']}!")
+    print(f" Your stats have improved: HP: {player['hp']}/{player['max_hp']}, Attack: {player['attack']}")

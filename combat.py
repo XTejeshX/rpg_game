@@ -1,7 +1,6 @@
 import enemy as e
 import player as p
-
-
+import random
 
 
 
@@ -57,7 +56,20 @@ def run_combat(player, enemy):
         elif choice == "2":
             # player tries to run away
             print("\n You  attempt to run away...")
-            pass
+            # 50% chance to successfully run away
+            if random.random() < 0.5:
+                print("\n You have successfully escaped from the enemy!")
+                return "flee"
+            else:
+                print("\n You have failed to escape!")
+                enemy_dmg = e.enemy_attack(enemy)
+                p.take_damage(player, enemy_dmg)
+                print(f"\n 😈 {enemy["name"]} hits you for a damage {enemy_dmg}! while fleeing")
+
+
+                if not p.is_alive(player):
+                    print("\n 💀 You have been defeated by the enemy while trying to flee...")
+                    return "dead"
 
 
         else:
