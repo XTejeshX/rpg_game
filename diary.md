@@ -1,3 +1,4 @@
+### PHASE 1
 APRIL 08, 2026
 
 CREATED A SMALL ADVENTURE GAME WITH ENTRY BANNER, CREATED A PLAYER WITH VARIOUS STATS, ADDED HEAL OPTION, AND EXITING THE GAME OPTION
@@ -18,3 +19,13 @@ APRIL 10 2026
 APRIL 13, 2026
 1. Added player level up feature improving player attack and HP in player.py file.
 2. Added feature where player decides to run away with a possibility of 50% in combat.py file.
+
+
+
+### PHASE 2
+
+April 14, 2026
+
+1. Planned to add multiple rooms of different types containing different bosses and drop loot
+2. Future work will include a small map in the main.py file as a print statement.
+3. currently added one entrance room for now.

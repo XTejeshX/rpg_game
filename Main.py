@@ -1,10 +1,15 @@
 import player as p
 import enemy as e
 import combat as c
+import rooms as r
 
 def show_banner():
     
     print(" This is a RPG Game, WELCOME TO THIS TEXT ADVENTURE RPG! ")
+
+def show_map():
+    # a simple map representation as print statement
+    print("THRONE ROOM, PRISON, HALLWAY, ARMORY, ENTRANCE, GUARD ROOM")
 
 
 def main_menu():
@@ -15,10 +20,17 @@ def main_menu():
     return input(" Enter your choice to continue :").strip()
 
 def game_loop(player):
-    print(f"\n welcome {player['name']}! your adventure awaits You.")
-    print(" Survive as long as possible and defeat enemies to level up. ")
+
+    # Main game loop with room navigation
+    current_room = "Entrance"
+    
+    print(f"\n welcome {player['name']}! your adventure awaits You. Find the Throne room to win.")
+    print("Or die trying!!")
 
     while True:
+
+        room = r.get_room(current_room)
+
         print("\n----------------------------------------")
         print("You are in a dungeon, What will you do?")
         print(" [1] Explore the dungeon and find enemy.")
@@ -74,6 +86,10 @@ def main():
                 name = "Hero"
             
             hero = p.create_player(name)
+
+            hero["inventory"] = []      # Bag of consumables
+            hero["weapon"] = "Fists"    # Equipped weapon
+            hero["weapon_bonus"] = 0    # Bonus attack from weapon
             game_loop(hero)
         
         elif choice == "2":
