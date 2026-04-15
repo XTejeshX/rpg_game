@@ -1,13 +1,12 @@
 ### PHASE 1
-APRIL 08, 2026
 
-CREATED A SMALL ADVENTURE GAME WITH ENTRY BANNER, CREATED A PLAYER WITH VARIOUS STATS, ADDED HEAL OPTION, AND EXITING THE GAME OPTION
+APRIL 08, 2026
+1. CREATED A SMALL ADVENTURE GAME WITH ENTRY BANNER, CREATED A PLAYER WITH VARIOUS STATS, ADDED HEAL OPTION, AND EXITING THE GAME OPTION.
 
 
 APRIL 09, 2026
-
 1. Created an enemy.py file where all the stuff about the enemy will be present like the type of enemy and their stats and whether if the enemy is defeated or not and spawning the enemy.
-2. Created an combat.py file where all the stuff about the combat will be present as of right now nothing is added into it just created a small function where the player and enemy will    run into combat.
+2. Created an combat.py file where all the stuff about the combat will be present as of right now nothing is added into it just created a small function where the player and enemy will run into combat.
 
 
 APRIL 10 2026
@@ -25,7 +24,12 @@ APRIL 13, 2026
 ### PHASE 2
 
 April 14, 2026
-
-1. Planned to add multiple rooms of different types containing different bosses and drop loot
+1. Planned to add multiple rooms of different types containing different bosses and drop loot.
 2. Future work will include a small map in the main.py file as a print statement.
 3. currently added one entrance room for now.
+
+
+April 15, 2026
+1. Added a map to show the dungeon in a print statement, modified player choice and possible combat in current room in main.py file.
+2. Added each room description, loot drop, enemy spawn probability, exits, and whether it has been visited or not. Also added move from one to another room possiblilty and whether all rooms are visted or not in rooms.py file.
+3. Planned for inventory.py file where it will contain the code that will handle the players inventory

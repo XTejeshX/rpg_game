@@ -2,14 +2,27 @@ import player as p
 import enemy as e
 import combat as c
 import rooms as r
+import random
 
 def show_banner():
     
     print(" This is a RPG Game, WELCOME TO THIS TEXT ADVENTURE RPG! ")
 
 def show_map():
-    # a simple map representation as print statement
-    print("THRONE ROOM, PRISON, HALLWAY, ARMORY, ENTRANCE, GUARD ROOM")
+    # Prints a simple ASCII map showing visited rooms.
+    print("""
+  ┌─────────────────────────────────┐
+  │          DUNGEON MAP            │
+  │                                 │
+  │         [THRONE ROOM]           │
+  │             │                   │
+  │ [PRISON]─[HALLWAY]─[ARMORY]     │
+  │              │          │       │
+  │          [ENTRANCE]─[GUARD RM]  │
+  │                                 │
+  │  ✅ = visited   ? = unknown     │
+  └─────────────────────────────────┘
+    """)
 
 
 def main_menu():
@@ -22,50 +35,89 @@ def main_menu():
 def game_loop(player):
 
     # Main game loop with room navigation
-    current_room = "Entrance"
+    current_room_key = "Entrance"
     
     print(f"\n welcome {player['name']}! your adventure awaits You. Find the Throne room to win.")
     print("Or die trying!!")
 
     while True:
 
-        room = r.get_room(current_room)
+        room = r.get_room(current_room_key)
+        r.show_room(room)
 
+        # random  boss encounter chance
+        if random.random() < room["enemy_chance"]:
+            foe = e.spawn_enemy(player["level"])
+        
+        # Boss room: stronger enemy
+        if room.get("is_boss_room"):
+            foe = {"name" : "Dungeon Boss", "hp": 150, "attack": 25, "gold": 100, "xp": 50}
+            print("\n 👑 The Dungeon Boss blocks your path!")
+
+        result = c.run_combat(player, foe)
+
+
+        if result == "dead":
+            print("\n =================================================")
+            print("                ☠️ Game Over ☠️                    ")
+            print(f" Level reached: {player['level']} | Total kills: {player['kills']} | Gold collected: {player["gold"]}")
+            print(" =================================================")
+            return
+        
+        # Win condition: beating the boss
+        if room.get("is_boss_room") and result == "win":
+            print("\n =================================================")
+            print("                🎉 You Win! 🎉                    ")
+            print(f" Level reached: {player['level']} | Total kills: {player['kills']} | Gold collected: {player['gold']}")
+            print(" =================================================")
+            return
+
+
+
+
+        # player action menu
         print("\n----------------------------------------")
         print("You are in a dungeon, What will you do?")
-        print(" [1] Explore the dungeon and find enemy.")
-        print(" [2] Rest (heal 20 HP, costs 10 gold)")
-        print(" [3] Display Stats.")
-        print(" [4] Quit to Menu.")
-
-        choice = input("Enter your choice :").strip()
-
-        if choice == "1":
-            #Spawn an enemy
-            foe = e.spawn_enemy(player["level"])
-            result = c.run_combat(player, foe)
-
-            if result == "dead":
-                print("GAME OVER")
-                print(f"Player has reached the level {player['level']} with total kills: {player['kills']}")
-                print("Better luck next time!!")
-                break   # Exit game loop and return to main menu
-
-            
-
-        elif choice == "2":
-            if player["gold"] >= 10:
-                player["gold"] -= 10
-                p.heal_player(player, 20)
-            else:
-                print("\n player does not have enough gold to rest (Need 10 gold)")
-
-        elif choice == "3":
-            p.show_stats(player)
+        print("     [n/s/e/w]   Move in a direction(north/south/east/west)")
+        print("     [p]         Pick up item")
+        print("     [u]         Use item")
+        print("     [i]         Show inventory")
+        print("     [m]         Show map")
+        print("     [t]         Show stats")
+        print("     [q]         Quit")
+        print("----------------------------------------")
         
-        elif choice == "4":
-            print("\n returning to main Menu...")
-            break
+
+        choice = input("\n Enter your choice :").strip().lower()
+
+        if choice in ("n","s","e","w"):
+            direction_map = {"n": "north", "s": "south", "e": "east", "w": "west"}
+            direction = direction_map[choice]
+            new_room_key = r.move(current_room_key, direction)
+
+            if new_room_key:
+                current_room_key = new_room_key
+            else:
+                print(f"\n You can't go {direction} from here.")
+        
+        elif choice == "p":
+            pass
+        
+        elif choice == "i":
+            pass
+
+        elif choice == "u":
+            pass
+
+        elif choice == "m":
+            show_map()
+
+        elif choice == "t":
+            p.show_stats(player)
+
+        elif choice == "q":
+            print("\n Returning to main menu... \n")
+            return
 
         else:
             print("\n Invalid choice")

@@ -1,0 +1,1 @@
+# this file will contain about the code of items pickup and usage etc
