@@ -2,6 +2,7 @@ import player as p
 import enemy as e
 import combat as c
 import rooms as r
+import inventory as inv
 import random
 
 def show_banner():
@@ -35,42 +36,42 @@ def main_menu():
 def game_loop(player):
 
     # Main game loop with room navigation
-    current_room_key = "Entrance"
+    current_room_key = "entrance"
     
     print(f"\n welcome {player['name']}! your adventure awaits You. Find the Throne room to win.")
     print("Or die trying!!")
 
     while True:
-
         room = r.get_room(current_room_key)
         r.show_room(room)
 
         # random  boss encounter chance
         if random.random() < room["enemy_chance"]:
+            print("near enemy room")
             foe = e.spawn_enemy(player["level"])
         
-        # Boss room: stronger enemy
-        if room.get("is_boss_room"):
-            foe = {"name" : "Dungeon Boss", "hp": 150, "attack": 25, "gold": 100, "xp": 50}
-            print("\n 👑 The Dungeon Boss blocks your path!")
+            # Boss room: stronger enemy
+            if room.get("is_boss_room"):
+                foe = {"name" : "Dungeon Boss", "hp": 150, "attack": 25, "gold": 100, "xp": 50}
+                print("\n 👑 The Dungeon Boss blocks your path!")
 
-        result = c.run_combat(player, foe)
+            result = c.run_combat(player, foe)
 
 
-        if result == "dead":
-            print("\n =================================================")
-            print("                ☠️ Game Over ☠️                    ")
-            print(f" Level reached: {player['level']} | Total kills: {player['kills']} | Gold collected: {player["gold"]}")
-            print(" =================================================")
-            return
+            if result == "dead":
+                print("\n =================================================")
+                print("                ☠️ Game Over ☠️                    ")
+                print(f" Level reached: {player['level']} | Total kills: {player['kills']} | Gold collected: {player["gold"]}")
+                print(" =================================================")
+                return
         
-        # Win condition: beating the boss
-        if room.get("is_boss_room") and result == "win":
-            print("\n =================================================")
-            print("                🎉 You Win! 🎉                    ")
-            print(f" Level reached: {player['level']} | Total kills: {player['kills']} | Gold collected: {player['gold']}")
-            print(" =================================================")
-            return
+            # Win condition: beating the boss
+            if room.get("is_boss_room") and result == "win":
+                print("\n =================================================")
+                print("                🎉 You Win! 🎉                    ")
+                print(f" Level reached: {player['level']} | Total kills: {player['kills']} | Gold collected: {player['gold']}")
+                print(" =================================================")
+                return
 
 
 
@@ -101,13 +102,13 @@ def game_loop(player):
                 print(f"\n You can't go {direction} from here.")
         
         elif choice == "p":
-            pass
+            inv.pick_up_item(player, room)
         
         elif choice == "i":
-            pass
+            inv.show_inventory(player)
 
         elif choice == "u":
-            pass
+            inv.use_item(player)
 
         elif choice == "m":
             show_map()

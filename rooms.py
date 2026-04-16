@@ -73,8 +73,7 @@ def show_room(room):
 def move(current_room_key, direction):
     # attempts to move in a direction from the current room and returns a new room key if valid or None if the room doesn't exist.
     room = DUNGEON.get(current_room_key)
-    exits = room.get["exits"]
-
+    exits = room.get("exits", {})
     if  direction in exits:return exits[direction]
     else: return None
 

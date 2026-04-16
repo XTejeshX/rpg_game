@@ -32,4 +32,9 @@ April 14, 2026
 April 15, 2026
 1. Added a map to show the dungeon in a print statement, modified player choice and possible combat in current room in main.py file.
 2. Added each room description, loot drop, enemy spawn probability, exits, and whether it has been visited or not. Also added move from one to another room possiblilty and whether all rooms are visted or not in rooms.py file.
-3. Planned for inventory.py file where it will contain the code that will handle the players inventory
+3. Planned for inventory.py file where it will contain the code that will handle the players inventory.
+
+
+April 16, 2025
+1. Added new features to inventory and the items and their descriptions and the functions that will be used and defined later in inventory.py file.
+2. Added some function calls, fixed some indentation bugs and naming mistakes from earlier versions in main.py and rooms.py files.
