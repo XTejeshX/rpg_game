@@ -35,6 +35,10 @@ April 15, 2026
 3. Planned for inventory.py file where it will contain the code that will handle the players inventory.
 
 
-April 16, 2025
+April 16, 2026
 1. Added new features to inventory and the items and their descriptions and the functions that will be used and defined later in inventory.py file.
 2. Added some function calls, fixed some indentation bugs and naming mistakes from earlier versions in main.py and rooms.py files.
+
+April 17, 2026
+1. Added 3 new features in inventory.py file where player can pickup an item from the room and store it into his inventory, view his inventory and can use items from the inventory.
+2. There are minor bugs that need fixing and will be fixed in the future.
