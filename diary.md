@@ -54,5 +54,5 @@ April 24, 2026
 ### PHASE 3
 
 April 24, 2026
-1. Added a new save_load.py file where it will manage the creation of the save file, checks if it exist, delete the save and peek into the save file, the definietions need to be defined for the functions.
+1. Added a new save_load.py file where it will manage the creation of the save file, checks if it exist, delete the save and peek into the save file, the functions need to be defined for the functions.
 2. The main file has been updated so that choice has been rearranged into main() and added a feature where typing sl will save the file.
