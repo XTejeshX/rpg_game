@@ -145,7 +145,7 @@ def use_item(player):
         item = ITEMS[key]
         print(f"    [{i + 1}] {item['name']}")
 
-    choice = input(" Enter number (or 0 to cancel)").strip()
+    choice = input(" Enter number (or 0 to cancel):").strip()
 
     if choice == 0:
         return False

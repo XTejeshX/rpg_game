@@ -39,6 +39,20 @@ April 16, 2026
 1. Added new features to inventory and the items and their descriptions and the functions that will be used and defined later in inventory.py file.
 2. Added some function calls, fixed some indentation bugs and naming mistakes from earlier versions in main.py and rooms.py files.
 
+
 April 17, 2026
 1. Added 3 new features in inventory.py file where player can pickup an item from the room and store it into his inventory, view his inventory and can use items from the inventory.
 2. There are minor bugs that need fixing and will be fixed in the future.
+
+
+April 24, 2026
+1. Forgot to add a room in rooms.py file in the dictionary, that has been rectified since it was causing an error when visiting that room.
+
+
+
+
+### PHASE 3
+
+April 24, 2026
+1. Added a new save_load.py file where it will manage the creation of the save file, checks if it exist, delete the save and peek into the save file, the definietions need to be defined for the functions.
+2. The main file has been updated so that choice has been rearranged into main() and added a feature where typing sl will save the file.

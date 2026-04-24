@@ -36,6 +36,14 @@ DUNGEON = {
         "enemy_chance" : 0.5,
         "visited" : False
     },
+        "prison": {
+        "name": "Prison Cells",
+        "description": " Rows of empty cells. Chains dangle from the ceiling. Something growls nearby.",
+        "exits": {"east": "hallway"},
+        "item" : "gold_pouch",
+        "enemy_chance" : 0.8,
+        "visited" : False
+    },
     "throne_room": {
         "name": " 💀 THRONE ROOM (BOSS)",
         "description": " A massive chamber. A rotting throne sits at the center. This is the final room",

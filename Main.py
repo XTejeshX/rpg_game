@@ -3,6 +3,7 @@ import enemy as e
 import combat as c
 import rooms as r
 import inventory as inv
+import save_load as sl
 import random
 
 def show_banner():
@@ -21,25 +22,18 @@ def show_map():
   │              │          │       │
   │          [ENTRANCE]─[GUARD RM]  │
   │                                 │
-  │  ✅ = visited   ? = unknown     │
   └─────────────────────────────────┘
     """)
 
 
-def main_menu():
-    # player choice
-    print(" [1] NEW GAME ")
-    print(" [2] QUIT ")
-
-    return input(" Enter your choice to continue :").strip()
-
-def game_loop(player):
+def game_loop(player, start_room = "entrance"):
 
     # Main game loop with room navigation
-    current_room_key = "entrance"
+    current_room_key = start_room
     
     print(f"\n welcome {player['name']}! your adventure awaits You. Find the Throne room to win.")
     print("Or die trying!!")
+    print(" Type [sv] to save anytime.\n")
 
     while True:
         room = r.get_room(current_room_key)
@@ -60,7 +54,7 @@ def game_loop(player):
 
             if result == "dead":
                 print("\n =================================================")
-                print("                ☠️ Game Over ☠️                    ")
+                print("                ☠️  Game Over  ☠️                    ")
                 print(f" Level reached: {player['level']} | Total kills: {player['kills']} | Gold collected: {player["gold"]}")
                 print(" =================================================")
                 return
@@ -85,6 +79,7 @@ def game_loop(player):
         print("     [i]         Show inventory")
         print("     [m]         Show map")
         print("     [t]         Show stats")
+        print("     [sv]        Save game")
         print("     [q]         Quit")
         print("----------------------------------------")
         
@@ -116,6 +111,9 @@ def game_loop(player):
         elif choice == "t":
             p.show_stats(player)
 
+        elif choice == "sv":
+            sl.save_game(player, current_room_key)
+
         elif choice == "q":
             print("\n Returning to main menu... \n")
             return
@@ -130,7 +128,20 @@ def main():
     show_banner()
 
     while True:
-        choice = main_menu()
+
+        # show save file info if it exists
+
+        if sl.save_exists:
+            sl.show_save_info()
+
+        print("\n     [1]     New Game")
+        print("     [2]     Continue (load save) " if sl.save_exists() else 
+              "     [2]     Continue (no save found)")
+        if sl.save_exists:
+            print("     [3]     Delete Save")
+        print("     [4]     Quit")
+
+        choice = input("\n Enter your choice")
 
         if choice == "1":
             name = input("Enter the player's name :")
@@ -144,13 +155,24 @@ def main():
             hero["weapon"] = "Fists"    # Equipped weapon
             hero["weapon_bonus"] = 0    # Bonus attack from weapon
             game_loop(hero)
-        
+
         elif choice == "2":
+            player, room_key = sl.load_game()
+
+            if player:
+                game_loop(player, start_room = room_key)
+            else:
+                print("\n There is no save file please start a new game!")
+
+        elif choice == "3":
+            sl.delete_save()
+        
+        elif choice == "4":
             print("\n Thanks for playing adventurer!! Visit again! \n")
             break
 
         else:
-            print("\ninvlaid choice! please enter a valid choice [1] or [2]\n")
+            print("\ninvlaid choice! please enter a valid choice.\n")
 
 
 if __name__ == "__main__":
