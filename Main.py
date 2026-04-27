@@ -141,7 +141,7 @@ def main():
             print("     [3]     Delete Save")
         print("     [4]     Quit")
 
-        choice = input("\n Enter your choice")
+        choice = input("\n Enter your choice    :")
 
         if choice == "1":
             name = input("Enter the player's name :")
